@@ -27,9 +27,9 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
     else console.log('Connected to MongoDB');
 });
 
-app.use('/create',require('./insert_data'));
-
-app.use('/relation',require('./relations'));
+app.use('/create',require('./routes/insert_data'));
+app.use('/relation',require('./routes/relations'));
+app.use('/aggregate',require('./routes/aggregation'));
 
 function shouldCompress(req, res) {
     if (req.headers["x-no-compression"]) return false;

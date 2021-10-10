@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const File = require('./schemas/files');
-const Folder = require('./schemas/folders');
-const mongoose = require("mongoose");
+const File = require('../schemas/files');
+const Folder = require('../schemas/folders');
 
 
 router.get('/single/object', async (req, res) => {

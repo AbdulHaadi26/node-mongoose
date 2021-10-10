@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const User = require('./schemas/users');
-const File = require('./schemas/files');
-const Folder = require('./schemas/folders');
+const User = require('../schemas/users');
+const File = require('../schemas/files');
+const Folder = require('../schemas/folders');
+const Post = require('../schemas/posts');
+const Comment = require('../schemas/comments');
 const mongoose = require("mongoose");
 
 router.put('/user', async (req, res) => {
@@ -103,5 +105,50 @@ router.put('/file', async (req, res) => {
     res.sendStatus(200);
 });
 
+router.put('/post', async (req, res) => {
+    await Post.insertMany([
+        {
+            title: 'Post 1',
+            author: 'Jimmy',
+            likes: 2
+        },
+        {
+            title: 'Post 2',
+            author: 'Sam',
+            likes: 5
+        }
+    ]);
+
+
+    await Comment.insertMany([
+        {
+            postTitle: 'Post 1',
+            comment: 'Simple 1',
+            likes: 2
+        },
+        {
+            postTitle: 'Post 1',
+            comment: 'Simple 2',
+            likes: 0
+        },
+          {
+            postTitle: 'Post 1',
+            comment: 'Simple 3',
+            likes: 0
+        },
+        {
+            postTitle: 'Post 2',
+            comment: 'Simple 1',
+            likes: 2
+        },
+        {
+            postTitle: 'Post 2',
+            comment: 'Simple 2',
+            likes: 0
+        }
+    ]);
+
+    res.sendStatus(200);
+});
 
 module.exports = router;
